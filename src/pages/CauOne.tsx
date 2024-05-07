@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const CauOne: React.FC = () => {
   const [count, setCount] = useState<number>(60);
@@ -24,7 +24,13 @@ const CauOne: React.FC = () => {
     setCount(60);
   };
   // clean up
-
+  useEffect(() => {
+    return () => {
+      if (timeId.current !== null) {
+        clearInterval(timeId.current);
+      }
+    };
+  }, []);
   return (
     <div className="bg-[#84d6fc] gap-2 w-[400px] flex flex-col justify-center rounded-[8px] p-4 ">
       <h3> Câu 1 cua iem</h3>
