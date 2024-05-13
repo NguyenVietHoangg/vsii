@@ -3,6 +3,7 @@ import { publicRoutes } from './routes';
 import './App.css';
 import CauOne from './pages/CauOne';
 import CauTwo from './pages/CauTwo';
+import Menu from './pages/Menu';
 
 function App() {
   return (
@@ -16,14 +17,22 @@ function App() {
           <li className="hover:bg-[#ccc]">
             <a href="/cautwo">Câu 2</a>
           </li>
+          <li className="hover:bg-[#ccc]">
+            <a href="/menu">Menu</a>
+          </li>
         </ul>
         <div className="mt-4 flex justify-center">
           {' '}
           <Routes>
             {publicRoutes.map((route, index) => {
-              const Page = route.component === 'CauOne' ? CauOne : CauTwo;
+              const Page =
+                route.component === 'CauOne'
+                  ? CauOne
+                  : route.component === 'CauTwo'
+                    ? CauTwo
+                    : Menu;
               return (
-                <Route key={index} path={route.path} element={<Page />} /> // Sử dụng biến Page trong element
+                <Route key={index} path={route.path} element={<Page />} /> //
               );
             })}
           </Routes>

@@ -6,5 +6,9 @@ export const publicRoutes = [
   {
     path: '/cautwo',
     component: 'CauTwo'
+  },
+  {
+    path: '/menu',
+    component: 'Menu'
   }
 ];
