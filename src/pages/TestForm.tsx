@@ -45,7 +45,9 @@ const TestForm: React.FC = () => {
         <label className="text-[16px] font-bold mt-[5px]">Name:</label>
         <div>
           <input
-            className="ml-2 px-3 py-1 rounded-[10px] border border-solid border-[#aaa8a8]"
+            className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
+              errors.username ? 'border-[#ed2020]' : 'border-[#aaa8a8]'
+            }`}
             type="text"
             id="username"
             {...register('username', {
@@ -65,7 +67,9 @@ const TestForm: React.FC = () => {
         <label className="text-[16px] font-bold mt-[5px]">Email:</label>
         <div>
           <input
-            className="ml-2 px-3 py-1 rounded-[10px] border border-solid border-[#aaa8a8]"
+            className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
+              errors.email ? 'border-[#ed2020]' : 'border-[#aaa8a8]'
+            }`}
             type="email"
             id="email"
             {...register('email', {
@@ -89,18 +93,20 @@ const TestForm: React.FC = () => {
         <label className="text-[16px] font-bold mt-[5px]">Age:</label>
         <div>
           <input
-            className="ml-2 px-3 py-1 rounded-[10px] border border-solid border-[#aaa8a8]"
+            className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
+              errors.age ? 'border-[#ed2020]' : 'border-[#aaa8a8]'
+            }`}
             type="number"
             id="age"
             {...register('age', {
               required: isValidRequired,
               min: {
                 value: condition.age.min,
-                message: `${isValidMin}  ${condition.age.min}`
+                message: `${isValidMin} ${condition.age.min}`
               },
               max: {
                 value: condition.age.max,
-                message: `${isValidMax}  ${condition.age.max}`
+                message: `${isValidMax} ${condition.age.max}`
               }
             })}
             placeholder="Nhập tuổi"
