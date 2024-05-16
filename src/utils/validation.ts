@@ -1,9 +1,19 @@
-/**
- * Kiểm tra xem một chuỗi có phải là một URL hợp lệ không.
- *
- * @param urlString Chuỗi URL cần kiểm tra.
- * @returns Trả về true nếu chuỗi là một URL hợp lệ, ngược lại trả về false.
- */
+//  check email
+// export const isValidEmail = (email: string): boolean => {
+//   // Kiểm tra định dạng email
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailRegex.test(email);
+// };
+// check length of string
+// export const isValidString = (
+//   string: string,
+//   min?: number,
+//   max?: number
+// ): boolean => {
+//   if (string.length < min) {
+//     return ``;
+//   }
+// };
 export const isValidUrl = (urlString: string): boolean => {
   var urlPattern = new RegExp(
     '^(https?:\\/\\/)?' + // validate protocol
@@ -17,12 +27,6 @@ export const isValidUrl = (urlString: string): boolean => {
   return !!urlPattern.test(urlString);
 };
 
-/**
- * Kiểm tra xem một đối tượng có phải là một đối tượng rỗng không.
- *
- * @param obj Đối tượng cần kiểm tra.
- * @returns Trả về true nếu đối tượng là rỗng, ngược lại trả về false.
- */
 export const isEmptyObject = (obj: object): boolean => {
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) return false;

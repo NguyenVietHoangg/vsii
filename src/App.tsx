@@ -4,6 +4,7 @@ import './App.css';
 import CauOne from './pages/CauOne';
 import CauTwo from './pages/CauTwo';
 import Menu from './pages/Menu';
+import TestForm from './pages/TestForm';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <li className="hover:bg-[#ccc]">
             <a href="/menu">Menu</a>
           </li>
+          <li className="hover:bg-[#ccc]">
+            <a href="/testform">TestForm</a>
+          </li>
         </ul>
         <div className="mt-4 flex justify-center">
           {' '}
@@ -30,7 +34,9 @@ function App() {
                   ? CauOne
                   : route.component === 'CauTwo'
                     ? CauTwo
-                    : Menu;
+                    : route.component === 'Menu'
+                      ? Menu
+                      : TestForm;
               return (
                 <Route key={index} path={route.path} element={<Page />} /> //
               );

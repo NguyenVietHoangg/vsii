@@ -10,5 +10,9 @@ export const publicRoutes = [
   {
     path: '/menu',
     component: 'Menu'
+  },
+  {
+    path: '/testform',
+    component: 'TestForm'
   }
 ];
