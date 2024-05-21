@@ -1,12 +1,5 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-// log validation
-import {
-  isValidEmail,
-  isValidRequired,
-  isValidMin,
-  isValidMax
-} from '../utils/logValidation';
 
 interface IFormInput {
   username: string;
@@ -14,8 +7,11 @@ interface IFormInput {
   age: number;
 }
 
-const TestForm: React.FC = () => {
-  // cấu hình điều kiện của form
+interface TestFormProps {
+  onSubmit?: SubmitHandler<IFormInput>;
+}
+
+const TestForm: React.FC<TestFormProps> = ({ onSubmit }) => {
   const condition = {
     email: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
     age: {
@@ -26,23 +22,26 @@ const TestForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors }
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    alert(
-      'username:' + data.username + '| email' + data.email + '| age:' + data.age
-    );
-    reset();
+  const submitForm: SubmitHandler<IFormInput> = (data) => {
+    if (onSubmit) {
+      onSubmit({
+        ...data,
+        age: Number(data.age)
+      });
+    }
   };
-
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(submitForm)}>
       <h2 className="text-[24px] font-bold">Test Form</h2>
 
       <div className="flex">
-        <label className="text-[16px] font-bold mt-[5px]">Name:</label>
+        <label htmlFor="username" className="text-[16px] font-bold mt-[5px]">
+          Name:
+        </label>
         <div>
           <input
             className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
@@ -51,7 +50,7 @@ const TestForm: React.FC = () => {
             type="text"
             id="username"
             {...register('username', {
-              required: isValidRequired
+              required: 'This field is required'
             })}
             placeholder="Họ và tên"
           />
@@ -64,7 +63,9 @@ const TestForm: React.FC = () => {
       </div>
 
       <div className="flex justify-between">
-        <label className="text-[16px] font-bold mt-[5px]">Email:</label>
+        <label htmlFor="email" className="text-[16px] font-bold mt-[5px]">
+          Email:
+        </label>
         <div>
           <input
             className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
@@ -73,10 +74,10 @@ const TestForm: React.FC = () => {
             type="email"
             id="email"
             {...register('email', {
-              required: isValidRequired,
+              required: 'This field is required',
               pattern: {
                 value: condition.email,
-                message: isValidEmail
+                message: 'Invalid email format'
               }
             })}
             placeholder="Nhập email"
@@ -90,7 +91,9 @@ const TestForm: React.FC = () => {
       </div>
 
       <div className="flex justify-between">
-        <label className="text-[16px] font-bold mt-[5px]">Age:</label>
+        <label htmlFor="age" className="text-[16px] font-bold mt-[5px]">
+          Age:
+        </label>
         <div>
           <input
             className={`ml-2 px-3 py-1 rounded-[10px] border border-solid ${
@@ -99,14 +102,14 @@ const TestForm: React.FC = () => {
             type="number"
             id="age"
             {...register('age', {
-              required: isValidRequired,
+              required: 'This field is required',
               min: {
                 value: condition.age.min,
-                message: `${isValidMin} ${condition.age.min}`
+                message: 'Age must be at least 18'
               },
               max: {
                 value: condition.age.max,
-                message: `${isValidMax} ${condition.age.max}`
+                message: 'Age must be at most 65'
               }
             })}
             placeholder="Nhập tuổi"
