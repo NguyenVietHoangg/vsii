@@ -14,5 +14,9 @@ export const publicRoutes = [
   {
     path: '/testform',
     component: 'TestForm'
+  },
+  {
+    path: '/testredux',
+    component: 'TestRedux'
   }
 ];

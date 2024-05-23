@@ -5,6 +5,7 @@ import CauOne from './pages/CauOne';
 import CauTwo from './pages/CauTwo';
 import Menu from './pages/Menu';
 import TestForm from './pages/TestForm';
+import TestRedux from './pages/TestRedux';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           <li className="hover:bg-[#ccc]">
             <a href="/testform">TestForm</a>
           </li>
+          <li className="hover:bg-[#ccc]">
+            <a href="/testredux">TestRedux</a>
+          </li>
         </ul>
         <div className="mt-4 flex justify-center">
           {' '}
@@ -36,7 +40,9 @@ function App() {
                     ? CauTwo
                     : route.component === 'Menu'
                       ? Menu
-                      : TestForm;
+                      : route.component === 'TestForm'
+                        ? TestForm
+                        : TestRedux;
               return (
                 <Route key={index} path={route.path} element={<Page />} /> //
               );

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Count from '../components/Count';
 
 const CauOne: React.FC = () => {
   const [count, setCount] = useState<number>(60);
@@ -54,6 +55,9 @@ const CauOne: React.FC = () => {
         >
           Reset
         </button>
+      </div>
+      <div>
+        <Count />
       </div>
     </div>
   );
